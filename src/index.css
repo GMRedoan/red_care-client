@@ -26,5 +26,5 @@ body {
 
 
 a.active {
-    @apply py-1 px-3 rounded-sm bg-primary text-white
+    @apply bg-primary text-white py-1 px-3 rounded-sm 
 }

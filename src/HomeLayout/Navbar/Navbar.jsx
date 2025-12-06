@@ -27,28 +27,28 @@ const Navbar = () => {
         <nav className="pr-4 md:px-8 flex justify-between items-center bg-base-200 sticky top-0 z-10">
             <div className="flex md:py-3">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+                    <div tabIndex={0} role="button" className="btn btn-ghost mt-2 lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-2">
-                        <div className='flex items-center gap-1 text-lg'>
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-30 p-2 shadow space-y-2">
+                        <div className='flex items-center gap-1 text-sm'>
                             <NavLink to='/'><li>Home</li></NavLink>
                         </div>
-                        <div className='flex items-center gap-1 text-lg'>
+                        <div className='flex items-center gap-1 text-sm'>
                             <NavLink to='addCar'><li>Add Car</li></NavLink>
                         </div>
-                        <div className='flex items-center gap-1 text-lg'>
+                        <div className='flex items-center gap-1 text-sm'>
                             <NavLink to='allCars'><li>Browse Cars</li></NavLink>
                         </div>
                     </ul>
                 </div>
                 <Link to='/' className='-ml-4 md:ml-0 flex'>
-                    <img className='w-[55px] md:w-[75px]' src={logo} alt="" />
+                    <img className='w-[65px] h-[50px] md:w-[75px] md:h-[60px]' src={logo} alt="" />
                     <div className='-space-y-2 pt-2'>
-                        <p className='text-2xl font-semibold font-logo '>RED</p>
-                        <p className='text-xl text-primary ml-5 font-semibold font-logo'>Care</p>
+                        <p className='text-xl md:text-3xl font-semibold font-logo text-blue-400'>RED</p>
+                        <p className='text-xl md:text-2xl text-primary ml-5 font-semibold font-logo'>Care</p>
                     </div>
                 </Link>
             </div>
@@ -90,14 +90,14 @@ const Navbar = () => {
                             <li>
                                 <button
                                     onClick={handleLogout}
-                                    className="btn btn-primary btn-sm text-white w-full rounded-lg shadow hover:bg-secondary">Log Out
+                                    className="btn btn-sm md:btn-md btn-primary text-white w-full rounded-lg shadow hover:bg-secondary">Log Out
                                 </button>
                             </li>
 
                         </ul>
                     </div>
                     :
-                    <Link to='/login' className="btn btn-primary font-bold text-white hover:bg-secondary">Login / SignUp</Link>
+                    <Link to='/login' className="btn btn-sm md:btn-md btn-primary font-bold text-white hover:bg-secondary">Login / SignUp</Link>
             }
         </nav>
     );

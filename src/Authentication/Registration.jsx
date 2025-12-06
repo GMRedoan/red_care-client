@@ -69,11 +69,11 @@ const Registration = () => {
             })
     }
     return (
-        <div className="hero bg-base-200">
+        <div className="py-8 md:py-20 hero bg-base-200">
             <title>Registration</title>
             <div className="hero-content flex-col">
                 <div className="text-center lg:text-center">
-                    <h1 className="text-5xl font-bold">Create Your <span className='text-primary'>Account</span> Now !</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold">Create Your <span className='text-primary'>Account</span> Now !</h1>
                     <p className="py-6 text-accent">
                         Register now and begin your great job.
                     </p>
@@ -84,21 +84,21 @@ const Registration = () => {
                             <fieldset className="fieldset">
                                 {/* name */}
                                 <label>Name</label>
-                                <input type="text" className="input"
+                                <input type="text" className="input w-full"
                                     name='name'
                                     required
                                     placeholder="Name" />
 
                                 {/* photo */}
                                 <label>Photo URL</label>
-                                <input type="text" className="input"
+                                <input type="text" className="input w-full"
                                     required
                                     name='photoURL'
                                     placeholder="Photo URL" />
 
                                 {/* email */}
                                 <label>Email</label>
-                                <input type="email" className="input"
+                                <input type="email" className="input w-full"
                                     name='email'
                                     required
                                     placeholder="Email" />
@@ -109,7 +109,7 @@ const Registration = () => {
                                     <input type={showPass ? 'text' : 'password'}
                                         name='password'
                                         required
-                                        className="input" placeholder="Password" />
+                                        className="input w-full" placeholder="Password" />
                                     <p
                                         onClick={() => setShowPass(!showPass)}
                                         className='absolute top-3.5 right-5 cursor-pointer z-10'>{showPass ? <FaEyeSlash /> : <FaEye />}</p>

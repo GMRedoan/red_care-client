@@ -3,6 +3,7 @@ import Root from "../Root/Root";
 import Home from "../Pages/Home/Home";
 import Login from "../Authentication/Login";
 import Registration from "../Authentication/Registration";
+import Error from "../Shared/Error";
 
 export const router = createBrowserRouter([
   {
@@ -24,4 +25,8 @@ export const router = createBrowserRouter([
         }
     ]
   },
+  {
+    path:'/*',
+    element: <Error></Error>
+  }
 ]);

@@ -59,7 +59,8 @@ const Login = () => {
                                     <input type={showPass ? 'text' : 'password'}
                                         name='password'
                                         required
-                                        className="input w-full" placeholder="Password" />
+                                        className="input w-full
+                                        " placeholder="Password" />
                                     <p
                                         onClick={() => setShowPass(!showPass)}
                                         className='absolute top-3.5 right-5 cursor-pointer z-10'>{showPass ? <FaEyeSlash /> : <FaEye />}</p>

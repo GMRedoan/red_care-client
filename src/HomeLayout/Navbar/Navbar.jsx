@@ -24,7 +24,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="pr-4 md:px-8 flex justify-between items-center bg-base-200 sticky top-0 z-10">
+        <nav className="pr-4 md:px-8 flex justify-between items-center bg-base-200 sticky top-0 z-50">
             <div className="flex md:py-3">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost mt-2 lg:hidden">
@@ -45,10 +45,10 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link to='/' className='-ml-4 md:ml-0 flex'>
-                    <img className='w-[65px] h-[50px] md:w-[75px] md:h-[60px]' src={logo} alt="" />
+                    <img className='w-[65px] h-[50px] md:w-[65px] md:h-[50px]' src={logo} alt="" />
                     <div className='-space-y-2 pt-2'>
-                        <p className='text-xl md:text-3xl font-semibold font-logo text-blue-400'>RED</p>
-                        <p className='text-xl md:text-2xl text-primary ml-5 font-semibold font-logo'>Care</p>
+                        <p className='text-xl md:text-2xl font-semibold font-logo text-blue-400'>RED</p>
+                        <p className='text-xl md:text-xl text-primary ml-5 font-semibold font-logo'>Care</p>
                     </div>
                 </Link>
             </div>
@@ -58,10 +58,10 @@ const Navbar = () => {
                         <NavLink to='/'><li>Home</li></NavLink>
                     </div>
                     <div className='flex items-center gap-1 text-lg'>
-                        <NavLink to='addCar'><li>Add Car</li></NavLink>
+                        <NavLink to='donation'><li>Donation Requests</li></NavLink>
                     </div>
                     <div className='flex items-center gap-1 text-lg'>
-                        <NavLink to='allCars'><li>Browse Cars</li></NavLink>
+                        <NavLink to='funding'><li>Funding</li></NavLink>
                     </div>
                 </ul>
             </nav>
@@ -78,13 +78,11 @@ const Navbar = () => {
 
                         <ul
                             tabIndex={0}
-                            className="dropdown-content menu bg-base-100 rounded-xl shadow-lg border border-primary w-56 pb-4">
-                            <li className="pointer-events-none!">
-                                <p className="font-semibold text-lg text-gray-800">{user.displayName}</p>
-                            </li>
-                            <li className="pointer-events-none!">
-                                <p className="text-sm text-gray-500">{user.email} </p>
-                            </li>
+                            className="dropdown-content menu bg-base-100 rounded-xl shadow-lg border border-primary w-36 py-4">
+                            <button
+                                // onClick={handleLogout}
+                                className="font-semibold text-[18px] cursor-pointer hover:text-blue-500">Dashboard
+                            </button>
 
                             <div className="divider my-1"></div>
                             <li>

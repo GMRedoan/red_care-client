@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "number": 1,
+    "title": "REGISTRATION",
+    "image": "https://i.ibb.co.com/DJ0VrrZ/Blood-donation-process.jpg",
+    "description": "You need to complete a simple registration form with all required contact information before starting the donation process.",
+    "icon": "FaRegClipboard"
+  },
+  {
+    "id": 2,
+    "number": 2,
+    "title": "HEALTH CHECK",
+    "image": "https://i.ibb.co.com/whtTHx3y/health-screening-lauren-8790-teaser-Left-Right.avif",
+    "description": "Your blood pressure, pulse, temperature, and hemoglobin levels will be checked to ensure you are fit for donation.",
+    "icon": "FaHeartPulse"
+  },
+  {
+    "id": 3,
+    "number": 3,
+    "title": "SCREENING",
+    "image": "https://i.ibb.co.com/N24M7QXq/2149404714-1024x681.jpg",
+    "description": "A short interview is conducted to go through your medical history and confirm your health status.",
+    "icon": "FaClipboardCheck"
+  },
+  {
+    "id": 4,
+    "number": 4,
+    "title": "DONATION",
+    "image": "https://i.ibb.co.com/QFfvD6SP/Blood-donor.jpg",
+    "description": "A sterile needle is used to collect blood. The process usually takes around 10 to 12 minutes.",
+    "icon": "FaTint"
+  },
+  {
+    "id": 5,
+    "number": 5,
+    "title": "REFRESHMENT",
+    "image": "https://i.ibb.co.com/5gjrkF3D/joe-faye-snacks-content-tile-762x562.jpg",
+    "description": "After donation, you will be provided with drinks and snacks to help your body recover.",
+    "icon": "FaMugHot"
+  },
+  {
+    "id": 6,
+    "number": 6,
+    "title": "COMPLETION",
+    "image": "https://i.ibb.co.com/jvFwD0wj/17717f584979ecfe5bbef5c34ac4634a.jpg",
+    "description": "You are all done! You may resume normal activities while staying hydrated. Thank you for saving lives.",
+    "icon": "FaCheckCircle"
+  }
+]

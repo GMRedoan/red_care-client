@@ -6,7 +6,7 @@ import axios from "axios";
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [role, setRole] = useState();
+    const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [donors, setDonors] = useState([]);
 
@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
         fetch("http://localhost:3000/users")
             .then((res) => res.json())
             .then((data) => setDonors(data))
-        //   .catch((err) => console.error(err));
+            .catch((err) => console.error(err));
     }, []);
 
     // create user
@@ -65,9 +65,9 @@ const AuthProvider = ({ children }) => {
         axios
             .get(`http://localhost:3000/role/${user.email}`)
             .then((res) => {
-                setRole(res.data.role)
-            })
-    }, [user]);
+                setUserInfo(res.data)
+             })
+    }, [user])
 
     const authData = {
         loading,
@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
         updateUserProfile,
         logout,
         donors,
-        role
+        userInfo
     }
 
     return <AuthContext value={authData}>{children}</AuthContext>;

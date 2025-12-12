@@ -15,6 +15,7 @@ const Registration = () => {
     const [error, setError] = useState('')
     const [showPass, setShowPass] = useState(false)
     const [showPass2, setShowPass2] = useState(false)
+    const [uploading, setUploading] = useState(false)
     const handleRegister = async (e) => {
         e.preventDefault()
         const form = e.target
@@ -40,26 +41,43 @@ const Registration = () => {
             notify("Password and confirm Password should be similar.")
             return
         }
-        const res = await axios.post(`https://api.imgbb.com/1/upload?&key=a61b7f4958aebb9ca0065ed632a5e5b9`, { image: file }, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+        let photo = '';
+        if (file) {
+            setUploading(true);
+            try {
+                const formDataUpload = new FormData();
+                formDataUpload.append("image", file);
+                const res = await axios.post(
+                    `https://api.imgbb.com/1/upload?&key=a61b7f4958aebb9ca0065ed632a5e5b9`,
+                    formDataUpload
+                );
+                photo = res.data.data.display_url;
+            } catch (err) {
+                console.log(err);
+                Swal.fire({
+                    title: "Image upload failed",
+                    icon: "error",
+                });
+                setUploading(false);
+                return;
             }
-        })
-        const photo = res.data.data.display_url
+            setUploading(false);
+        }
+        //    const photo = res.data.data.display_url
         const formData = {
-            name, email, bloodGroup, district, upazila, photo, status:'active', role:'donor'
+            name, email, bloodGroup, district, upazila, photo, status: 'active', role: 'donor'
         }
         createUser(email, password)
             .then((result) => {
                 // save users data in db
                 axios.post('http://localhost:3000/users', formData)
-                .then(res => {
-                    console.log(res.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-                 updateUserProfile({
+                    .then(res => {
+                        console.log(res.data)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                updateUserProfile({
                     displayName: name,
                     photoURL: photo
                 })
@@ -205,12 +223,13 @@ const Registration = () => {
 
                                 </div>
                                 <div className='md:col-span-3 flex justify-center '>
-                                <button
-                                    type='submit'
-                                    className="btn bg-primary mt-4 text-white hover:bg-secondary 
-                                font-semibold">Register Now
-                                </button>
-                                </div>
+                                    <button
+                                        type="submit"
+                                        className="btn bg-primary mt-4 text-white hover:bg-secondary font-semibold"
+                                        disabled={uploading}
+                                    >
+                                        {uploading ? "Please Wait.." : "Register Now"}
+                                    </button>                                </div>
                             </fieldset>
                             <p className='pt-2'>Already have an Account ! <Link state={location.state} to='/login'><span className='text-blue-500 font-semibold hover:underline'>Login Now</span></Link></p>
                         </form>

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { IoSearch } from 'react-icons/io5';
  
 const Navbar = () => {
-    const { user, logout } = use(AuthContext)
+    const { userInfo, logout, user } = use(AuthContext)
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -77,7 +77,7 @@ const Navbar = () => {
                         <div tabIndex={0} role="button" className="m-1">
                             <img
                                 className="w-[42px] h-[42px] rounded-full cursor-pointer ring-2 ring-primary/40 hover:ring-primary transition"
-                                src={user.photoURL}
+                                src={userInfo.photo}
                                 alt="profile"
                             />
                         </div>

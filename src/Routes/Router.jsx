@@ -3,12 +3,14 @@ import Root from "../Root/Root";
 import Home from "../Pages/Home/Home";
 import Login from "../Authentication/Login";
 import Registration from "../Authentication/Registration";
-import Error from "../Shared/Error";
-import Search from "../Pages/Search";
-import DonationReq from "../Pages/DonationReq";
+import CreateDonationReq from "../DashBoardLayout/Donor/CreateDonationReq"
 import Loading from "../Shared/Loading";
-import DashBoard from "../DashBoardLayout/DashBoard";
-import Profile from "../Pages/Dashboard/DonorDashBoard/Profile";
+import MyDonationReq from "../DashBoardLayout/Donor/MyDonationReq";
+import Search from '../Pages/Search';
+import Profile from '../DashBoardLayout/Donor/Profile'
+import DonationReq from "../Pages/DonationReq";
+import DashBoardLayout from '../DashBoardLayout/DashBoardLayout'
+import DashBoard from "../DashBoardLayout/Donor/DashBoard";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +34,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/donation',
-        element: <DonationReq></DonationReq>
+        element: <DonationReq>,</DonationReq>
       },
       {
         path: '/search',
@@ -43,12 +45,27 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path:'/dashboard',
-    element: <DashBoard></DashBoard>,
-    children:[
+    path: '/dashboard',
+    element: <DashBoardLayout></DashBoardLayout>,
+    children: [
       {
-        path:'profile',
-        element: <Profile></Profile>
+        path: 'profile',
+        element: <Profile></Profile>,
+        loader: () => fetch('http://localhost:3000/districts_upazilas'),
+        hydrateFallbackElement: <Loading></Loading>
+
+      },
+      {
+        path: 'my-donation-requests',
+        element: <MyDonationReq></MyDonationReq>
+      },
+      {
+        path: 'create-donation-request',
+        element: <CreateDonationReq></CreateDonationReq>
+      },
+      {
+        path: '/dashboard',
+        element: <DashBoard></DashBoard>
       }
     ]
   },

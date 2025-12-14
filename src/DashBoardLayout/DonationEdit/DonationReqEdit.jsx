@@ -1,38 +1,47 @@
-import React, { use } from "react";
-import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router";
-import { AuthContext } from "../../Authentication/AuthContex";
-import Swal from "sweetalert2";
-import useAxios from "../../Hooks/UseAxios";
+import React, { use } from 'react';
+import { useForm } from 'react-hook-form';
+import { useLoaderData } from 'react-router';
+import { AuthContext } from '../../Authentication/AuthContex';
+import Swal from 'sweetalert2';
+import useAxios from '../../Hooks/UseAxios';
 
-const CreateDonationReq = () => {
+const districtsPromise = fetch('/district.json').then(res => res.json())
+const upazilsPromise = fetch('/upazila.json').then(res => res.json())
+
+const DonationReqEdit = () => {
+    const info = useLoaderData()
     const { userInfo } = use(AuthContext)
-    const { districts, upazilas } = useLoaderData();
+    const districts = use(districtsPromise)
+    const upazilas = use(upazilsPromise)
     const axiosInstance = useAxios()
 
     const {
         register,
-        handleSubmit,
-        reset,
+        handleSubmit
     } = useForm()
 
     const onSubmit = async (data) => {
-        data.status = "pending"
-        const res = await axiosInstance.post('/donationReq', data)
-        if (res.data) {
-            Swal.fire({
-                title: "Donation Request Successful!",
-                icon: "success",
-                confirmButtonColor: "#F91617",
-            });
-            reset();
-        }
-    };
 
+        const res = await axiosInstance.patch(`/donationReqDetails/${info._id}`,
+            data)
+
+        if (res.data.modifiedCount === 0) {
+            return Swal.fire({
+                title: "Nothing is changed",
+                icon: "info",
+                confirmButtonColor: "#357BF0",
+            })
+        }
+        Swal.fire({
+            title: "Profile Updated Successfully!",
+            icon: "success",
+            confirmButtonColor: "#F91617",
+        });
+    };
     return (
         <div className="my-10 max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
             <h2 className="text-3xl font-bold mb-8 text-center">
-                Create a <span className="text-primary">Donation</span> Request
+                Edit Your <span className="text-primary">Donation</span> Request
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -42,7 +51,7 @@ const CreateDonationReq = () => {
                     <input
                         type="text"
                         readOnly
-                        defaultValue={userInfo.name}
+                        defaultValue={userInfo?.name}
                         {...register("requesterName")}
                         className="input input-bordered w-full bg-gray-100"
                     />
@@ -53,7 +62,7 @@ const CreateDonationReq = () => {
                     <input
                         type="email"
                         readOnly
-                        defaultValue={userInfo.email}
+                        defaultValue={userInfo?.email}
                         {...register("requesterEmail")}
                         className="input input-bordered w-full bg-gray-100"
                     />
@@ -63,7 +72,7 @@ const CreateDonationReq = () => {
                     <label className="font-semibold mb-1 block">Recipient Name</label>
                     <input
                         type="text"
-                        placeholder="Enter recipient name"
+                        defaultValue={info.recipientName}
                         {...register("recipientName", { required: true })}
                         className="input input-bordered w-full"
                     />
@@ -72,7 +81,7 @@ const CreateDonationReq = () => {
                 <div>
                     <label className="font-semibold mb-1 block">Recipient District</label>
                     <select
-                        defaultValue=""
+                        defaultValue={info.recipientDistrict}
                         {...register("recipientDistrict", { required: true })}
                         className="select select-bordered w-full"
                     >
@@ -88,7 +97,7 @@ const CreateDonationReq = () => {
                 <div>
                     <label className="font-semibold mb-1 block">Recipient Upazila</label>
                     <select
-                        defaultValue=""
+                        defaultValue={info.recipientUpazila}
                         {...register("recipientUpazila", { required: true })}
                         className="select select-bordered w-full"
                     >
@@ -105,7 +114,7 @@ const CreateDonationReq = () => {
                     <label className="font-semibold mb-1 block">Hospital Name</label>
                     <input
                         type="text"
-                        placeholder="The name of hospital that needs blood"
+                        defaultValue={info.hospitalName}
                         {...register("hospitalName", { required: true })}
                         className="input input-bordered w-full"
                     />
@@ -115,7 +124,7 @@ const CreateDonationReq = () => {
                     <label className="font-semibold mb-1 block">Full Address</label>
                     <input
                         type="text"
-                        placeholder="Type exact location"
+                        defaultValue={info.addressLine}
                         {...register("addressLine", { required: true })}
                         className="input input-bordered w-full"
                     />
@@ -124,7 +133,7 @@ const CreateDonationReq = () => {
                 <div>
                     <label className="font-semibold mb-1 block">Blood Group</label>
                     <select
-                        defaultValue=""
+                        defaultValue={info.bloodGroup}
                         {...register("bloodGroup", { required: true })}
                         className="select select-bordered w-full"
                     >
@@ -140,6 +149,7 @@ const CreateDonationReq = () => {
                     <label className="font-semibold mb-1 block">Donation Date</label>
                     <input
                         type="date"
+                        defaultValue={info.donationDate}
                         {...register("donationDate", { required: true })}
                         className="input input-bordered w-full"
                     />
@@ -149,6 +159,7 @@ const CreateDonationReq = () => {
                     <label className="font-semibold mb-1 block">Donation Time</label>
                     <input
                         type="time"
+                        defaultValue={info.donationTime}
                         {...register("donationTime", { required: true })}
                         className="input input-bordered w-full"
                     />
@@ -158,20 +169,15 @@ const CreateDonationReq = () => {
                     <label className="font-semibold mb-1 block">Request Message</label>
                     <textarea
                         rows="4"
-                        placeholder="Explain why you need blood in detail"
+                        defaultValue={info.requestMessage}
                         {...register("requestMessage", { required: true })}
                         className="textarea textarea-bordered w-full"
                     ></textarea>
                 </div>
 
                 <div className="md:col-span-2 flex justify-center">
-                    <button
-                        type="submit"
-                        disabled={userInfo.status === "blocked"}
-                        className={`btn w-60 text-white ${userInfo.status === "blocked" ? "bg-gray-600 border-gray-600" : "btn-primary"
-                            }`}
-                    >
-                        {userInfo.status === "blocked" ? "Currently this user is Blocked" : "Send Donation Request"}
+                    <button className='btn btn-primary text-white'>
+                        Update Donation Request
                     </button>
                 </div>
             </form>
@@ -179,4 +185,4 @@ const CreateDonationReq = () => {
     );
 };
 
-export default CreateDonationReq;
+export default DonationReqEdit;

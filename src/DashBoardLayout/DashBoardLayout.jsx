@@ -23,20 +23,20 @@ const DashBoardLayout = () => {
     if (loading || showLoader) return <Loading />;
 
     return (
-        <div className='grid grid-cols-5'>
+        <div className=''>
 
             <button
-                className="md:hidden pl-2 pt-2 text-primary text-xl"
+               className="pl-3 pt-3 text-primary text-2xl fixed top-0 left-0 z-50"
                 onClick={() => setOpenSidebar(true)}
             >
                 <FaBars />
             </button>
 
-            <div className='col-span-1'>
+            <div>
                 <Aside openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
 
             </div>
-            <div className="mx-4 col-span-5 md:col-span-4 ">
+            <div>
                 <Outlet />
             </div>
         </div>

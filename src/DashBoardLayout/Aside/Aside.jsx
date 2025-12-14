@@ -2,30 +2,30 @@ import { NavLink, Link, useNavigate } from "react-router";
 import { FaHome, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { LuGitPullRequestDraft } from "react-icons/lu";
 import { IoCreateOutline } from "react-icons/io5";
-import logo from '../../assets/bglogo.png';
 import { ImCross } from "react-icons/im";
 import { MdDashboard } from "react-icons/md";
 import { use } from "react";
-import { AuthContext } from "../../Authentication/AuthContex";
 import Swal from "sweetalert2";
 
+import logo from "../../assets/bglogo.png";
+import { AuthContext } from "../../Authentication/AuthContex";
+
 const Aside = ({ openSidebar, setOpenSidebar }) => {
-    const { logout } = use(AuthContext)
-    const navigate = useNavigate()
+    const { logout } = use(AuthContext);
+    const navigate = useNavigate();
+
     const handleLogout = () => {
         logout()
             .then(() => {
                 Swal.fire({
                     title: "You Logged Out Successfully",
                     icon: "success",
-                    confirmButtonColor: "#F91617"
+                    confirmButtonColor: "#F91617",
                 });
-                navigate('/')
+                navigate("/");
             })
-            .catch((error) => {
-                console.log(error)
-            });
-    }
+            .catch(console.log);
+    };
 
     const menuItems = [
         { path: "/dashboard", label: "Dashboard", icon: <MdDashboard /> },
@@ -36,37 +36,46 @@ const Aside = ({ openSidebar, setOpenSidebar }) => {
 
     return (
         <>
+            {/* Overlay */}
             {openSidebar && (
                 <div
-                    className="fixed inset-0 bg-opacity-40 md:hidden"
+                    className="fixed inset-0 bg-opacity-40 z-40"
                     onClick={() => setOpenSidebar(false)}
-                ></div>
+                />
             )}
 
-            <aside className={`fixed md:static top-0 left-0 bg-base-200 shadow-2xl p-5 transform transition-transform duration-300 z-50 h-full
-                ${openSidebar ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
-                `}>
-                <button
-                    className="md:hidden text-xl mb-4"
+             <aside
+                className={`fixed top-0 left-0 z-50 h-full w-70 bg-base-200 shadow-2xl p-5
+                transform transition-transform duration-300
+                ${openSidebar ? "translate-x-0" : "-translate-x-full"}`}
+            >
+                 <button
+                    className="text-xl mb-4"
                     onClick={() => setOpenSidebar(false)}
                 >
                     <ImCross className="text-primary" />
                 </button>
 
-                <div className="flex justify-center">
-                    <img className="w-20 md:w-24" src={logo} alt="Logo" />
-                </div>
-                <h2 className="text-xl md:text-2xl font-bold text-center my-4"><span className="text-blue-400">Donor</span> Dashboard</h2>
+                 <Link to="/" className="flex justify-center">
+                    <img src={logo} alt="Logo" className="w-20 md:w-24" />
+                </Link>
 
-                <ul className="menu gap-2">
-                    {menuItems.map(item => (
+                <h2 className="text-xl md:text-2xl font-bold text-center my-4">
+                    <span className="text-blue-400">Donor</span> Dashboard
+                </h2>
+
+                 <ul className="menu gap-2">
+                    {menuItems.map((item) => (
                         <li key={item.path}>
                             <NavLink
                                 to={item.path}
                                 end={item.path === "/dashboard"}
+                                onClick={() => setOpenSidebar(false)}
                                 className={({ isActive }) =>
-                                    `flex items-center gap-3 font-medium py-2 px-4 rounded-md 
-                                    ${isActive ? "bg-primary text-white" : "hover:bg-base-300"}`
+                                    `flex items-center gap-3 font-medium py-2 px-4 rounded-md
+                                    ${isActive
+                                        ? "bg-primary text-white"
+                                        : "hover:bg-base-300"}`
                                 }
                             >
                                 <span className="text-lg">{item.icon}</span>
@@ -75,19 +84,23 @@ const Aside = ({ openSidebar, setOpenSidebar }) => {
                         </li>
                     ))}
 
-                    <li className="mt-100 md:mt-60">
+                     <li className="mt-100 md:mt-60">
                         <Link
-                            onClick={() => window.location.href = '/'}
+                            to="/"
                             className="flex items-center gap-3 py-2 px-4 rounded-md text-primary font-semibold hover:bg-base-200"
                         >
-                            <FaHome className="text-lg" /> Home
+                            <FaHome className="text-lg" />
+                            Home
                         </Link>
+
                         <button
                             onClick={handleLogout}
-                            className="flex items-center gap-3 py-2 px-4 rounded-md text-primary font-semibold hover:bg-base-200"><FaSignOutAlt
-                             /> Log Out
+                            className="flex items-center gap-3 py-2 px-4 rounded-md text-primary font-semibold hover:bg-base-200 w-full text-left"
+                        >
+                            <FaSignOutAlt />
+                            Log Out
                         </button>
-                     </li>
+                    </li>
                 </ul>
             </aside>
         </>

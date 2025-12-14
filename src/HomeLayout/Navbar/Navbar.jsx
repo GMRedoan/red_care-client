@@ -60,10 +60,7 @@ const Navbar = () => {
                         <NavLink to='/'><li>Home</li></NavLink>
                     </div>
                     <div className='flex items-center gap-1 text-lg'>
-                        <NavLink to='donation'><li>Donation Requests</li></NavLink>
-                    </div>
-                    <div className='flex items-center gap-1 text-lg'>
-                        <NavLink to='funding'><li>Funding</li></NavLink>
+                        <NavLink to='donationReq'><li>Donation Requests</li></NavLink>
                     </div>
                     <div className='flex items-center gap-1 text-lg'>
                        <li>  <NavLink to='search'><IoSearch className='w-10'/></NavLink> </li>

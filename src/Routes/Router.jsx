@@ -8,9 +8,12 @@ import Loading from "../Shared/Loading";
 import MyDonationReq from "../DashBoardLayout/Donor/MyDonationReq";
 import Search from '../Pages/Search';
 import Profile from '../DashBoardLayout/Donor/Profile'
-import DonationReq from "../Pages/DonationReq";
+import DonationReq from '../Pages/DonationReq'
 import DashBoardLayout from '../DashBoardLayout/DashBoardLayout'
 import DashBoard from "../DashBoardLayout/Donor/DashBoard";
+import DonationReqDetails from "../Pages/DonationReqDetails";
+import PrivateRoutes from "./PrivateRoutes";
+import DonationReqEdit from "../DashBoardLayout/DonationEdit/DonationReqEdit";
 
 export const router = createBrowserRouter([
   {
@@ -33,8 +36,16 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <Loading></Loading>
       },
       {
-        path: '/donation',
-        element: <DonationReq>,</DonationReq>
+        path: '/donationReq',
+        element: <DonationReq></DonationReq>
+      },
+      {
+        path: '/donationReqDetails/:id',
+        element: <PrivateRoutes>
+          <DonationReqDetails></DonationReqDetails>
+        </PrivateRoutes>,
+        loader: ({ params }) => fetch(`http://localhost:3000/donationReqDetails/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>
       },
       {
         path: '/search',
@@ -49,11 +60,14 @@ export const router = createBrowserRouter([
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
       {
+        index: true,
+        element: <DashBoard></DashBoard>
+      },
+      {
         path: 'profile',
         element: <Profile></Profile>,
         loader: () => fetch('http://localhost:3000/districts_upazilas'),
         hydrateFallbackElement: <Loading></Loading>
-
       },
       {
         path: 'my-donation-requests',
@@ -66,8 +80,10 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <Loading></Loading>
       },
       {
-        path: '/dashboard',
-        element: <DashBoard></DashBoard>
+        path: 'donationReqEdit/:id',
+        element: <DonationReqEdit></DonationReqEdit>,
+        loader: ({ params }) => fetch(`http://localhost:3000/donationReqDetails/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>
       }
     ]
   },

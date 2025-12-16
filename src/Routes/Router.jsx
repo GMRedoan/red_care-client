@@ -3,108 +3,146 @@ import Root from "../Root/Root";
 import Home from "../Pages/Home/Home";
 import Login from "../Authentication/Login";
 import Registration from "../Authentication/Registration";
-import CreateDonationReq from "../DashBoardLayout/DashBoard/Donor/CreateDonationReq"
+import CreateDonationReq from "../DashBoardLayout/DashBoard/Donor/CreateDonationReq";
 import Loading from "../Shared/Loading";
 import MyDonationReq from "../DashBoardLayout/DashBoard/Donor/MyDonationReq";
-import Search from '../Pages/Search';
-import Profile from '../DashBoardLayout/DashBoard/Profile'
-import DonationReq from '../Pages/DonationReq'
-import DashBoardLayout from '../DashBoardLayout/DashBoardLayout'
+import Search from "../Pages/Search";
+import Profile from "../DashBoardLayout/DashBoard/Profile";
+import DonationReq from "../Pages/DonationReq";
+import DashBoardLayout from "../DashBoardLayout/DashBoardLayout";
 import DashBoard from "../DashBoardLayout/DashBoard/DashBoard";
 import DonationReqDetails from "../Pages/DonationReqDetails";
 import PrivateRoutes from "./PrivateRoutes";
 import DonationReqEdit from "../DashBoardLayout/DonationEdit/DonationReqEdit";
 import AllUsers from "../DashBoardLayout/DashBoard/Admin/AllUsers";
 import AllRequest from "../DashBoardLayout/DashBoard/AllRequest";
+import { axiosInstance } from "../Hooks/UseAxios";
+import AdminRoutes from "./AdminRoutes";
+import DonorRoutes from "./DonorRoutes";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
+    element: <Root />,
     children: [
       {
         index: true,
-        path: '/',
-        element: <Home></Home>
+        element: <Home />,
       },
       {
-        path: '/login',
-        element: <Login></Login>
+        path: "/login",
+        element: <Login />,
       },
       {
-        path: '/registration',
-        element: <Registration></Registration>,
-        loader: () => fetch('http://localhost:3000/districts_upazilas'),
-        hydrateFallbackElement: <Loading></Loading>
+        path: "/registration",
+        element: <Registration />,
+        loader: async () => {
+          const res = await axiosInstance.get("/districts_upazilas");
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
       },
       {
-        path: '/donationReq',
-        element: <DonationReq></DonationReq>
+        path: "/donationReq",
+        element: <DonationReq />,
       },
       {
-        path: '/donationReqDetails/:id',
-        element: <PrivateRoutes>
-          <DonationReqDetails></DonationReqDetails>
-        </PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:3000/donationReqDetails/${params.id}`),
-        hydrateFallbackElement: <Loading></Loading>
+        path: "/donationReqDetails/:id",
+        element: (
+          <PrivateRoutes>
+            <DonationReqDetails />
+          </PrivateRoutes>
+        ),
+        loader: async ({ params }) => {
+          const res = await axiosInstance.get(
+            `/donationReqDetails/${params.id}`
+          );
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
       },
       {
-        path: '/search',
-        element: <Search></Search>,
-        loader: () => fetch('http://localhost:3000/districts_upazilas'),
-        hydrateFallbackElement: <Loading></Loading>
-      }
-    ]
+        path: "/search",
+        element: <Search />,
+        loader: async () => {
+          const res = await axiosInstance.get("/districts_upazilas");
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
+      },
+    ],
   },
   {
-    path: '/dashboard',
-    element: <PrivateRoutes>
-      <DashBoardLayout></DashBoardLayout>
-    </PrivateRoutes>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoutes>
+        <DashBoardLayout />
+      </PrivateRoutes>
+    ),
     children: [
       {
         index: true,
-        element: <DashBoard></DashBoard>,
-        loader: () => fetch('http://localhost:3000/users'),
-        hydrateFallbackElement: <Loading></Loading>
+        element: <DashBoard />,
+        loader: async () => {
+          const res = await axiosInstance.get("/users");
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
       },
       {
-        path: 'profile',
-        element: <Profile></Profile>,
-        loader: () => fetch('http://localhost:3000/districts_upazilas'),
-        hydrateFallbackElement: <Loading></Loading>
+        path: "profile",
+        element: <Profile />,
+        loader: async () => {
+          const res = await axiosInstance.get("/districts_upazilas");
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
       },
       {
-        path: 'my-donation-requests',
-        element: <MyDonationReq></MyDonationReq>
+        path: "my-donation-requests",
+        element: <DonorRoutes>
+          <MyDonationReq />
+        </DonorRoutes>,
       },
       {
-        path: 'create-donation-request',
-        element: <CreateDonationReq></CreateDonationReq>,
-        loader: () => fetch('http://localhost:3000/districts_upazilas'),
-        hydrateFallbackElement: <Loading></Loading>
+        path: "create-donation-request",
+        element: <DonorRoutes>
+          <CreateDonationReq />
+        </DonorRoutes>,
+        loader: async () => {
+          const res = await axiosInstance.get("/districts_upazilas");
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
       },
       {
-        path: 'donationReqEdit/:id',
-        element: <DonationReqEdit></DonationReqEdit>,
-        loader: ({ params }) => fetch(`http://localhost:3000/donationReqDetails/${params.id}`),
-        hydrateFallbackElement: <Loading></Loading>
+        path: "donationReqEdit/:id",
+        element: <DonationReqEdit />,
+        loader: async ({ params }) => {
+          const res = await axiosInstance.get(
+            `/donationReqDetails/${params.id}`
+          );
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
       },
       {
-        path:'all-users',
-        element:<AllUsers></AllUsers>,
-        loader: () => fetch('http://localhost:3000/users'),
-        hydrateFallbackElement:<Loading></Loading>
+        path: "all-users",
+        element:  <AdminRoutes>
+          <AllUsers></AllUsers>
+        </AdminRoutes>,
+        loader: async () => {
+          const res = await axiosInstance.get("/users");
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading />,
       },
       {
-        path:'all-blood-donation-request',
-        element:<AllRequest></AllRequest>
-      }
-    ]
+        path: "all-blood-donation-request",
+        element: <AdminRoutes>
+          <AllRequest />
+        </AdminRoutes>,
+      },
+    ],
   },
-  {
-    path: '/*',
-    element: <Error></Error>
-  }
 ]);

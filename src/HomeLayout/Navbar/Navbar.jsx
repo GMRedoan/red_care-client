@@ -34,15 +34,15 @@ const Navbar = () => {
                     <ul
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-30 p-2 shadow space-y-2">
-                        <div className='flex items-center gap-1 text-sm'>
-                            <NavLink to='/'><li>Home</li></NavLink>
-                        </div>
-                        <div className='flex items-center gap-1 text-sm'>
-                            <NavLink to='addCar'><li>Add Car</li></NavLink>
-                        </div>
-                        <div className='flex items-center gap-1 text-sm'>
-                            <NavLink to='allCars'><li>Browse Cars</li></NavLink>
-                        </div>
+                    <div className='flex items-center gap-1 text-sm '>
+                        <NavLink to='/'><li>Home</li></NavLink>
+                    </div>
+                    <div className='flex items-center gap-1 text-sm'>
+                        <NavLink to='donationReq'><li>Donation Req.</li></NavLink>
+                    </div>
+                    <div className='flex items-center gap-1 text-sm'>
+                       <li>  <NavLink to='search'><IoSearch className='w-10'/></NavLink> </li>
+                    </div>
                     </ul>
                 </div>
                 <Link to='/' className='-ml-4 md:ml-0 flex'>

@@ -111,7 +111,7 @@ const AllUsers = () => {
 
 
     return (
-        <section className="p-4 px-30 pt-14 min-h-screen">
+        <section className="md:px-30 p-4 pt-14 min-h-screen">
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                 <div className="pb-8">
                     <h2 className="text-4xl font-bold pb-2">

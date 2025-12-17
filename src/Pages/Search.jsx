@@ -86,7 +86,7 @@ const Search = () => {
 
                 <div className="mt-10">
                     <div className="overflow-x-auto w-full rounded-xl shadow-lg">
-                        <div className="min-w-[600px] bg-white">
+                        <div className="bg-base-200">
 
                             {filteredDonors.length > 0 ? (
                                 <table className="table w-full bg-white">

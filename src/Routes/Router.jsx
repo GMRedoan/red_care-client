@@ -23,34 +23,34 @@ import DonorRoutes from "./DonorRoutes";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Root></Root>,
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Home></Home>,
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <Login></Login>,
       },
       {
         path: "/registration",
-        element: <Registration />,
+        element: <Registration></Registration>,
         loader: async () => {
           const res = await axiosInstance.get("/districts_upazilas");
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/donationReq",
-        element: <DonationReq />,
+        element: <DonationReq></DonationReq>,
       },
       {
         path: "/donationReqDetails/:id",
         element: (
           <PrivateRoutes>
-            <DonationReqDetails />
+            <DonationReqDetails></DonationReqDetails>
           </PrivateRoutes>
         ),
         loader: async ({ params }) => {
@@ -59,16 +59,16 @@ export const router = createBrowserRouter([
           );
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading> ,
       },
       {
         path: "/search",
-        element: <Search />,
+        element: <Search></Search>,
         loader: async () => {
           const res = await axiosInstance.get("/districts_upazilas");
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading>,
       },
     ],
   },
@@ -76,55 +76,55 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoutes>
-        <DashBoardLayout />
+        <DashBoardLayout></DashBoardLayout>
       </PrivateRoutes>
     ),
     children: [
       {
         index: true,
-        element: <DashBoard />,
+        element: <DashBoard></DashBoard>,
         loader: async () => {
           const res = await axiosInstance.get("/users");
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: <Profile></Profile>,
         loader: async () => {
           const res = await axiosInstance.get("/districts_upazilas");
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "my-donation-requests",
         element: <DonorRoutes>
-          <MyDonationReq />
+          <MyDonationReq></MyDonationReq>
         </DonorRoutes>,
       },
       {
         path: "create-donation-request",
         element: <DonorRoutes>
-          <CreateDonationReq />
+          <CreateDonationReq></CreateDonationReq>
         </DonorRoutes>,
         loader: async () => {
           const res = await axiosInstance.get("/districts_upazilas");
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "donationReqEdit/:id",
-        element: <DonationReqEdit />,
+        element: <DonationReqEdit></DonationReqEdit>,
         loader: async ({ params }) => {
           const res = await axiosInstance.get(
             `/donationReqDetails/${params.id}`
           );
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "all-users",
@@ -135,12 +135,12 @@ export const router = createBrowserRouter([
           const res = await axiosInstance.get("/users");
           return res.data;
         },
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "all-blood-donation-request",
         element: <AdminRoutes>
-          <AllRequest />
+          <AllRequest></AllRequest>
         </AdminRoutes>,
       },
     ],

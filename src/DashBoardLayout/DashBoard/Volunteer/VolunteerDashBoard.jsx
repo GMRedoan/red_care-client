@@ -20,7 +20,7 @@ const VolunteerDashBoard = ({ users, allReq }) => {
             </div>
 
             <h2 className="text-3xl font-extrabold text-center mb-10">
-                Admin <span className="text-primary">Statistics</span>
+                Statistics
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

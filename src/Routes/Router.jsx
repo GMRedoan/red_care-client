@@ -71,10 +71,15 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
-        path:'/funding',
+        path: '/funding',
         element: <PrivateRoutes>
           <Funding></Funding>
-        </PrivateRoutes>
+        </PrivateRoutes>,
+        loader: async () => {
+          const res = await axiosInstance.get("/funds");
+          return res.data;
+        },
+        hydrateFallbackElement: <Loading></Loading>,
       }
     ],
   },

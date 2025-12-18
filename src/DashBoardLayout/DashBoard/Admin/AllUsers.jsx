@@ -135,6 +135,7 @@ const AllUsers = () => {
                 <table className="table w-full">
                     <thead className="bg-primary text-white ">
                         <tr>
+                            <th>No</th>
                             <th>User</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -144,8 +145,9 @@ const AllUsers = () => {
                     </thead>
 
                     <tbody>
-                        {filteredUsers.map((user) => (
+                        {filteredUsers.map((user, index) => (
                             <tr key={user._id} className="hover">
+                                <td>{index+1}</td>
                                 <td>
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">

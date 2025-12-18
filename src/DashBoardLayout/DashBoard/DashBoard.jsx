@@ -7,11 +7,18 @@ import VolunteerDashBoard from "../DashBoard/Volunteer/VolunteerDashBoard";
 
 const allReqPromise = fetch('https://assignment-11-server-beta-ashen.vercel.app/donationReq')
     .then(res => res.json())
+const allFundsPromise = fetch('https://assignment-11-server-beta-ashen.vercel.app/funds')
+    .then(res => res.json())
+
 const DashBoard = () => {
     const { userInfo } = use(AuthContext);
     const users = useLoaderData()
     const allReq = use(allReqPromise)
-
+    const allFunds = use(allFundsPromise)
+    const totalFundAmount = allFunds.reduce(
+        (total, fund) => total + Number(fund.fundAmount),
+        0
+    );
 
     return (
         <div className="p-4 pt-14 min-h-screen">
@@ -20,10 +27,10 @@ const DashBoard = () => {
                 userInfo?.role == 'donor' && <DonorDashBoard></DonorDashBoard>
             }
             {
-                userInfo?.role == 'admin' && <AdminDashBoard users={users} allReq={allReq}></AdminDashBoard>
+                userInfo?.role == 'admin' && <AdminDashBoard users={users} allReq={allReq} totalFundAmount={totalFundAmount}></AdminDashBoard>
             }
             {
-                userInfo?.role == 'volunteer' && <VolunteerDashBoard users={users} allReq={allReq}></VolunteerDashBoard>
+                userInfo?.role == 'volunteer' && <VolunteerDashBoard users={users} allReq={allReq} totalFundAmount={totalFundAmount}></VolunteerDashBoard>
             }
         </div>
     );

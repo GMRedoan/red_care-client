@@ -21,6 +21,7 @@ import DonorRoutes from "./DonorRoutes";
 import AllRequestRoutes from "./AllRequestsRoutes";
 import Error from '../Shared/Error'
 import Funding from "../Pages/Funding";
+import FundForm from "../Pages/FundForm";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,12 @@ export const router = createBrowserRouter([
           return res.data;
         },
         hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: '/fundForm',
+        element: <PrivateRoutes>
+          <FundForm></FundForm>
+        </PrivateRoutes>
       }
     ],
   },

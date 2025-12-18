@@ -1,9 +1,10 @@
 import React, { use } from 'react';
 import { FaHandHoldingUsd, FaTint, FaUsers } from 'react-icons/fa';
 import { AuthContext } from '../../../Authentication/AuthContex';
+import { TbCurrencyTaka } from 'react-icons/tb';
 
 
-const VolunteerDashBoard = ({ users, allReq }) => {
+const VolunteerDashBoard = ({ users, allReq, totalFundAmount }) => {
     const { userInfo } = use(AuthContext);
 
 
@@ -43,7 +44,7 @@ const VolunteerDashBoard = ({ users, allReq }) => {
                             <FaHandHoldingUsd />
                         </div>
                         <div>
-                            <h3 className="text-4xl font-bold">$10</h3>
+                            <h3 className="text-4xl font-bold flex"><TbCurrencyTaka /> {totalFundAmount}</h3>
                             <p className="opacity-90 text-lg">Total Funding</p>
                         </div>
                     </div>

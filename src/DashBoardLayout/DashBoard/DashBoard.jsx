@@ -5,7 +5,7 @@ import AdminDashBoard from "../DashBoard/Admin/AdminDashBoard";
 import { useLoaderData } from "react-router";
 import VolunteerDashBoard from "../DashBoard/Volunteer/VolunteerDashBoard";
 
-const allReqPromise = fetch('http://localhost:3000/donationReq')
+const allReqPromise = fetch('https://assignment-11-server-beta-ashen.vercel.app/donationReq')
     .then(res => res.json())
 const DashBoard = () => {
     const { userInfo } = use(AuthContext);

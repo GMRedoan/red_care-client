@@ -4,7 +4,7 @@ import { Link, NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../../Authentication/AuthContex';
 import Swal from 'sweetalert2';
 import { IoSearch } from 'react-icons/io5';
- 
+
 const Navbar = () => {
     const { userInfo, logout, user } = use(AuthContext)
     const navigate = useNavigate()
@@ -34,15 +34,15 @@ const Navbar = () => {
                     <ul
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-30 p-2 shadow space-y-2">
-                    <div className='flex items-center gap-1 text-sm '>
-                        <NavLink to='/'><li>Home</li></NavLink>
-                    </div>
-                    <div className='flex items-center gap-1 text-sm'>
-                        <NavLink to='donationReq'><li>Donation Req.</li></NavLink>
-                    </div>
-                    <div className='flex items-center gap-1 text-sm'>
-                       <li>  <NavLink to='search'><IoSearch className='w-10'/></NavLink> </li>
-                    </div>
+                        <div className='flex items-center gap-1 text-sm '>
+                            <NavLink to='/'><li>Home</li></NavLink>
+                        </div>
+                        <div className='flex items-center gap-1 text-sm'>
+                            <NavLink to='donationReq'><li>Donation Req.</li></NavLink>
+                        </div>
+                        <div className='flex items-center gap-1 text-sm'>
+                            <li>  <NavLink to='search'><IoSearch className='w-10' /></NavLink> </li>
+                        </div>
                     </ul>
                 </div>
                 <Link to='/' className='-ml-4 md:ml-0 flex'>
@@ -63,8 +63,12 @@ const Navbar = () => {
                         <NavLink to='donationReq'><li>Donation Requests</li></NavLink>
                     </div>
                     <div className='flex items-center gap-1 text-lg'>
-                       <li>  <NavLink to='search'><IoSearch className='w-10'/></NavLink> </li>
+                        <li>  <NavLink to='search'><IoSearch className='w-10' /></NavLink> </li>
                     </div>
+                    <div className='flex items-center gap-1 text-lg'>
+                        <li>  <NavLink to='funding'>Fund</NavLink> </li>
+                    </div>
+
 
                 </ul>
             </nav>

@@ -19,7 +19,9 @@ import { axiosInstance } from "../Hooks/UseAxios";
 import AdminRoutes from "./AdminRoutes";
 import DonorRoutes from "./DonorRoutes";
 import AllRequestRoutes from "./AllRequestsRoutes";
- 
+import Error from '../Shared/Error'
+import Funding from "../Pages/Funding";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -48,15 +50,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/donationReqDetails/:id",
-        element: (
-          <PrivateRoutes>
-            <DonationReqDetails></DonationReqDetails>
-          </PrivateRoutes>
-        ),
+        element: <PrivateRoutes>
+          <DonationReqDetails></DonationReqDetails>
+        </PrivateRoutes>,
         loader: async ({ params }) => {
           const res = await axiosInstance.get(
             `/donationReqDetails/${params.id}`
-          );
+          )
           return res.data;
         },
         hydrateFallbackElement: <Loading></Loading>,
@@ -70,6 +70,12 @@ export const router = createBrowserRouter([
         },
         hydrateFallbackElement: <Loading></Loading>,
       },
+      {
+        path:'/funding',
+        element: <PrivateRoutes>
+          <Funding></Funding>
+        </PrivateRoutes>
+      }
     ],
   },
   {
@@ -140,7 +146,11 @@ export const router = createBrowserRouter([
       {
         path: "all-blood-donation-request",
         element: <AllRequestRoutes></AllRequestRoutes>
-       }
-     ],
+      }
+    ],
   },
+  {
+    path: '/*',
+    element: <Error></Error>
+  }
 ]);

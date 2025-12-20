@@ -22,6 +22,8 @@ import AllRequestRoutes from "./AllRequestsRoutes";
 import Error from '../Shared/Error'
 import Funding from "../Pages/Funding";
 import FundForm from "../Pages/FundForm";
+import PaymentSuccess from "../Pages/PaymentSuccess";
+import PaymentCancel from "../Pages/PaymentCancel";
 
 export const router = createBrowserRouter([
   {
@@ -87,82 +89,94 @@ export const router = createBrowserRouter([
         element: <PrivateRoutes>
           <FundForm></FundForm>
         </PrivateRoutes>
+      },
+      {
+        path: '/payment-success',
+        element: <PrivateRoutes>
+          <PaymentSuccess></PaymentSuccess>
+        </PrivateRoutes>
+      },
+    {
+      path: '/payment-cancelled',
+      element: <PrivateRoutes>
+        <PaymentCancel></PaymentCancel>
+      </PrivateRoutes>
       }
-    ],
+ ],
   },
-  {
-    path: "/dashboard",
+{
+  path: "/dashboard",
     element: (
       <PrivateRoutes>
         <DashBoardLayout></DashBoardLayout>
       </PrivateRoutes>
     ),
-    children: [
-      {
-        index: true,
-        element: <DashBoard></DashBoard>,
-        loader: async () => {
-          const res = await axiosInstance.get("/users");
-          return res.data;
+      children: [
+        {
+          index: true,
+          element: <DashBoard></DashBoard>,
+          loader: async () => {
+            const res = await axiosInstance.get("/users");
+            return res.data;
+          },
+          hydrateFallbackElement: <Loading></Loading>,
         },
-        hydrateFallbackElement: <Loading></Loading>,
-      },
-      {
-        path: "profile",
-        element: <Profile></Profile>,
-        loader: async () => {
-          const res = await axiosInstance.get("/districts_upazilas");
-          return res.data;
+        {
+          path: "profile",
+          element: <Profile></Profile>,
+          loader: async () => {
+            const res = await axiosInstance.get("/districts_upazilas");
+            return res.data;
+          },
+          hydrateFallbackElement: <Loading></Loading>,
         },
-        hydrateFallbackElement: <Loading></Loading>,
-      },
-      {
-        path: "my-donation-requests",
-        element: <DonorRoutes>
-          <MyDonationReq></MyDonationReq>
-        </DonorRoutes>,
-      },
-      {
-        path: "create-donation-request",
-        element: <DonorRoutes>
-          <CreateDonationReq></CreateDonationReq>
-        </DonorRoutes>,
-        loader: async () => {
-          const res = await axiosInstance.get("/districts_upazilas");
-          return res.data;
+        {
+          path: "my-donation-requests",
+          element: <DonorRoutes>
+            <MyDonationReq></MyDonationReq>
+          </DonorRoutes>,
         },
-        hydrateFallbackElement: <Loading></Loading>,
-      },
-      {
-        path: "donationReqEdit/:id",
-        element: <DonationReqEdit></DonationReqEdit>,
-        loader: async ({ params }) => {
-          const res = await axiosInstance.get(
-            `/donationReqDetails/${params.id}`
-          );
-          return res.data;
+        {
+          path: "create-donation-request",
+          element: <DonorRoutes>
+            <CreateDonationReq></CreateDonationReq>
+          </DonorRoutes>,
+          loader: async () => {
+            const res = await axiosInstance.get("/districts_upazilas");
+            return res.data;
+          },
+          hydrateFallbackElement: <Loading></Loading>,
         },
-        hydrateFallbackElement: <Loading></Loading>,
-      },
-      {
-        path: "all-users",
-        element: <AdminRoutes>
-          <AllUsers></AllUsers>
-        </AdminRoutes>,
-        loader: async () => {
-          const res = await axiosInstance.get("/users");
-          return res.data;
+        {
+          path: "donationReqEdit/:id",
+          element: <DonationReqEdit></DonationReqEdit>,
+          loader: async ({ params }) => {
+            const res = await axiosInstance.get(
+              `/donationReqDetails/${params.id}`
+            );
+            return res.data;
+          },
+          hydrateFallbackElement: <Loading></Loading>,
         },
-        hydrateFallbackElement: <Loading></Loading>,
-      },
-      {
-        path: "all-blood-donation-request",
-        element: <AllRequestRoutes></AllRequestRoutes>
-      }
-    ],
+        {
+          path: "all-users",
+          element: <AdminRoutes>
+            <AllUsers></AllUsers>
+          </AdminRoutes>,
+          loader: async () => {
+            const res = await axiosInstance.get("/users");
+            return res.data;
+          },
+          hydrateFallbackElement: <Loading></Loading>,
+        },
+        {
+          path: "all-blood-donation-request",
+          element: <AllRequestRoutes></AllRequestRoutes>
+        }
+      ],
   },
-  {
-    path: '/*',
+{
+  path: '/*',
     element: <Error></Error>
-  }
+}
 ]);

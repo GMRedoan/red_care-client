@@ -27,11 +27,11 @@ const FundForm = () => {
             fundAmount: parseInt(data.fundAmount),
             fundingDate: data.fundingDate,
         };
-         axiosInstance.post("/funds", fundData)
-         .then(res => {
-            window.location.href = res.data.url
-         })
-     };
+        axiosInstance.post("/create-payment-checkout", fundData)
+            .then(res => {
+                window.location.href = res.data.url
+            })
+    };
 
     return (
         <div className="min-h-screen flex justify-center items-center px-4">

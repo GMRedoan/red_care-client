@@ -12,8 +12,9 @@ An User can saw his own profile and also he can update his profile.
 Besides, an user can create blood donation request and saw his created request. After creating request a user can update his request. But An Admin can deal anything he wants. He can Block a user if needed. Besides, He can make a donor to volunteer. Also he can edit, delete and view any donation request. A fund option is located in the home page, in this page anyone can donate money in this organization. As a helping Website we need lot of money for providing support those people who are in distress.
 
 # Npm Packages:
-React Icon
-Toastify
-Slider swipe
-Daisyui
+React Icon,
+Toastify,
+Slider swipe,
+Daisyui,
+Stripe,
 React Hook Form

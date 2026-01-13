@@ -5,7 +5,7 @@ A Blood donation project. This is very valuable project for who need emergency b
 The main purpose of this project is who need blood and who want to donate for critical condition or who need blood for argent. An user who want to donate can donate by confirming blood donation request. Besides a family member or who needs blood can request blood donation. He has to create request with proper information. Thats why he/she can easily get his required blood.
 
 # Live Url: 
-https://red-care-2026.netlify.app
+ https://red-care-client.vercel.app
 
 # Key Features:
 An User can saw his own profile and also he can update his profile.

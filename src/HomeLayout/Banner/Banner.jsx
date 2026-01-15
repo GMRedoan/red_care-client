@@ -31,7 +31,7 @@ const Banner = () => {
       className="relative text-white 
   bg-cover bg-center 
   bg-no-repeat 
-  py-24 md:py-32 
+  py-24 md:py-36 
   bg-scroll md:bg-fixed"
       style={{ backgroundImage: `url(${hero})` }}>
       <div className="absolute inset-0 bg-black/70"></div>

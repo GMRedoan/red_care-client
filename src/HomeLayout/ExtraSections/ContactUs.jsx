@@ -14,7 +14,7 @@ const ContactUs = () => {
     }
     return (
         <div id="contact-section" className="w-full py-10 px-4">
-            <div data-aos="zoom-in" className="text-center pb-20">
+            <div className="text-center pb-20">
                 <h1 className="text-4xl md:text-5xl font-bold leading-snug">
                     Get in <span className="text-primary">Touch</span> With Us
                 </h1>
@@ -23,11 +23,11 @@ const ContactUs = () => {
                     Reach out for inquiries, assistance, or collaboration. We're committed to providing quick and helpful responses.
                 </p>
             </div>
-            <div data-aos="zoom-in" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
 
-                <div className="bg-red-200 text-black p-10 rounded-xl shadow-lg hover:bg-red-300">
-                    <h2 className="text-3xl font-bold mb-4">Connect With Our Team</h2>
-                    <div className="font-semibold">
+                <div className="bg-base-200 p-10 rounded-xl shadow-lg hover:scale-[1.03] transition-all duration-300 hover:shadow-2xl">
+                    <h2 className="text-3xl font-bold mb-4"><span className="text-primary">Connect</span> With Our Team</h2>
+                    <div className="font-semibold text-accent">
                         <p className="mt-6">House no: 63</p>
                         <p>Khan Shorok</p>
                         <p>Aftabnagar, Rampura, Dhaka 1100 </p>
@@ -48,12 +48,12 @@ const ContactUs = () => {
                             <p>contact@redcare.com</p>
                         </div>
                     </div>
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center animate-pulse">
                         <img className="md:w-50" src={logo} alt="" />
                     </div>
                 </div>
 
-                <div className="bg-base-2
+                <div className="bg-base-200 hover:
                 00 p-10 rounded-xl shadow-md">
                     <form onSubmit={handleContact} className="grid grid-cols-1 md:grid-cols-2 gap-5">
 

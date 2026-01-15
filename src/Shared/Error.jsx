@@ -16,7 +16,7 @@ const Error = () => {
             </div>
 
             <div className='relative z-10 top-140 flex flex-col justify-center items-center'>
-                 <Link to='/' className='btn btn-sm md:btn-md btn-primary text-white mt-10 hover:bg-secondary'>Back to Home</Link>
+                 <Link to='/' className='btn bg-red-500 border-0 hover:bg-white hover:text-black mt-10'>Back to Home</Link>
             </div>
         </div>
     );

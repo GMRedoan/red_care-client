@@ -3,18 +3,25 @@ import Swal from "sweetalert2";
 import { Link } from "react-router";
 import { AuthContext } from "../../../Authentication/AuthContex";
 import useAxios from "../../../Hooks/UseAxios";
+import Loader from "../../../Shared/Loader";
 
 const MyDonationReq = () => {
   const { userInfo } = use(AuthContext)
-  const axiosInstance = useAxios
-  ()
-
+  const axiosInstance = useAxios()
+  const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState([]);
   const [filterStatus, setFilterStatus] = useState("all")
 
   useEffect(() => {
-    axiosInstance.get(`/donationReq/${userInfo?.email}`)
-      .then((res) => setRequests(res.data));
+    if (!userInfo?.email) return;
+    setLoading(true);
+    axiosInstance
+      .get(`/donationReq/${userInfo.email}`)
+      .then((res) => {
+        setRequests(res.data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [userInfo?.email, axiosInstance]);
 
   const filteredRequests =
@@ -98,9 +105,26 @@ const MyDonationReq = () => {
       });
   }
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (filteredRequests.length === 0) {
+    return (
+      <p className="text-accent text-2xl text-center md:py-30 font-semibold">
+        No donation requests has been found.
+      </p>
+    );
+  }
+
+
   return (
     <div className="p-6 pt-10">
-            <title>My Donation Requests</title>
+      <title>My Donation Requests</title>
       <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">
         My <span className="text-primary">Donation</span> Requests
       </h2>
@@ -139,14 +163,7 @@ const MyDonationReq = () => {
           </thead>
 
           <tbody>
-            {filteredRequests.length === 0 ? (
-              <tr>
-                <td colSpan="7" className="text-center py-4 text-accent">
-                  No donation requests found.
-                </td>
-              </tr>
-            ) : (
-              filteredRequests.map((req, index) => (
+            {filteredRequests.map((req, index) => (
                 <tr key={req._id} className="bg-base-200">
                   <td>{index + 1}</td>
                   <td>{req.recipientName}</td>
@@ -190,7 +207,7 @@ const MyDonationReq = () => {
                           Cancel
                         </button>
                       </div>
-                    ): <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
+                    ) : <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
                   </td>
                   <td>
                     {req.status === "pending" ? (
@@ -206,7 +223,7 @@ const MyDonationReq = () => {
                           Delete
                         </button>
                       </div>
-                    ): <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
+                    ) : <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
                   </td>
                   <td>
                     <Link
@@ -218,7 +235,7 @@ const MyDonationReq = () => {
                   </td>
                 </tr>
               ))
-            )}
+            }
           </tbody>
         </table>
       </div>

@@ -9,8 +9,25 @@ import { BiDonateBlood } from "react-icons/bi";
 const DonationReqDetails = () => {
   const singleReq = useLoaderData()
   const [request, setRequest] = useState(singleReq)
-  const { userInfo } = use(AuthContext)
+  const { userInfo, user } = use(AuthContext)
   const axiosInstance = useAxios()
+
+
+  const handleDonateClick = () => {
+    if (!user) {
+      Swal.fire({
+        icon: "warning",
+        title: "Login Required",
+        text: "Please login first to donate blood.",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#ef4444",
+      });
+      return;
+    }
+
+    document.getElementById("my_modal_5").showModal();
+  };
+
 
   const handleConfirmDonation = async () => {
     if (request.requesterEmail == userInfo.email) {
@@ -114,14 +131,15 @@ const DonationReqDetails = () => {
       </div>
 
       <div className="flex justify-center mt-4">
+
         {request.status !== "pending" ? (
           <button disabled className="btn bg-gray-500 px-20 text-white">
             Donation is not available
           </button>
         ) : (
           <button
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-            className="btn btn-primary px-20 text-white"
+            onClick={handleDonateClick}
+            className="btn btn-primary px-20 text-white flex items-center gap-2"
           >
             Donate Now <BiDonateBlood size={18} />
           </button>

@@ -25,6 +25,9 @@ import FundForm from "../Pages/FundForm";
 import PaymentSuccess from "../Pages/PaymentSuccess";
 import PaymentCancel from "../Pages/PaymentCancel";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import FAQ from "../Shared/FAQ";
+import ContactUs from "../HomeLayout/ExtraSections/ContactUs";
+import Blogs from "../HomeLayout/ExtraSections/Blogs";
 
 export const router = createBrowserRouter([
   {
@@ -54,10 +57,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/donationReqDetails/:id",
-        element: <PrivateRoutes>
-          <DonationReqDetails></DonationReqDetails>
-        </PrivateRoutes>,
-        loader: async ({ params }) => {
+        element: <DonationReqDetails></DonationReqDetails>,
+         loader: async ({ params }) => {
           const res = await axiosInstance.get(
             `/donationReqDetails/${params.id}`
           )
@@ -105,10 +106,21 @@ export const router = createBrowserRouter([
       },
       {
         path: '/pp',
-
         element: <PrivateRoutes>
           <PrivacyPolicy></PrivacyPolicy>
         </PrivateRoutes>
+      },
+      {
+        path:'/faq',
+        element:<FAQ></FAQ>
+      },
+      {
+        path:'/contact',
+        element:<ContactUs></ContactUs>
+      },
+      {
+        path:'/blog',
+        element:<Blogs></Blogs>
       }
  ],
   },

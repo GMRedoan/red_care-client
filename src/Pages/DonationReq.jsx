@@ -1,20 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import useAxios from "../Hooks/UseAxios";
+import Loader from "../Shared/Loader";
 
 const DonationReq = () => {
-  const [requests, setRequests] = useState([])
-  const axiosInstance = useAxios()
+  const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const axiosInstance = useAxios();
 
   useEffect(() => {
-    axiosInstance.get("/donationReq").then((res) => setRequests(res.data))
-  }, [axiosInstance])
+    setLoading(true);
+    axiosInstance
+      .get("/donationReq")
+      .then((res) => {
+        setRequests(res.data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [axiosInstance]);
 
-  const pendingRequests = requests.filter((req) => req.status === "pending")
+  const pendingRequests = requests.filter(
+    (req) => req.status === "pending"
+  );
 
-  if (pendingRequests.length === 0) {
+   if (loading) {
     return (
-      <p className="text-gray-600 text-2xl text-center md:py-30 font-semibold">
+      <div className="flex justify-center items-center min-h-[60vh]"> <Loader></Loader>
+       </div>
+    );
+  }
+
+   if (pendingRequests.length === 0) {
+    return (
+      <p className="text-accent text-2xl text-center md:py-30 font-semibold">
         Currently No Pending Donation Request Has Been Found
       </p>
     );
@@ -23,9 +41,11 @@ const DonationReq = () => {
   return (
     <div className="p-6 pt-10">
       <title>Donation Request</title>
+
       <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">
         All <span className="text-primary">Donation</span> Requests
       </h2>
+
       <p className="text-accent text-center">
         Explore all pending donation requests submitted by our community. You
         can see details such as recipient, blood group, hospital, and request
@@ -46,6 +66,7 @@ const DonationReq = () => {
               <th>Action</th>
             </tr>
           </thead>
+
           <tbody className="bg-base-100">
             {pendingRequests.map((req, index) => (
               <tr key={req._id}>

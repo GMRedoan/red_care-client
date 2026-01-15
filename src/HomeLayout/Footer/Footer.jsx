@@ -1,10 +1,10 @@
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import logo from '../../assets/bglogo.png'
 
 const Footer = () => {
     return (
-        <footer data-aos="zoom-in" className="bg-linear-to-b from-black to-gray-900 text-gray-300 py-12">
+        <footer className="bg-linear-to-b from-black to-gray-900 text-gray-300 py-12">
             <div className="container mx-auto px-4">
 
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-10 text-center md:text-left">
@@ -49,18 +49,27 @@ const Footer = () => {
                                 className="hover:text-white">
                                 <a>About</a>
                             </li>
-                            <li className="hover:text-white"><a href="/search">Find Donor</a></li>
-                            <li className="hover:text-white"><a>Contact</a></li>
+                            <li className="hover:text-white"><a href="/search">Search Blood</a></li>
+                            <li
+                                onClick={() => {
+                                    const section = document.getElementById("contact-section");
+
+                                    if (section) {
+                                        section.scrollIntoView({ behavior: "smooth" });
+                                    } else {
+                                        window.location.href = "/";
+                                    }
+                                }}
+                                className="hover:text-white"><a>Contact</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 className="text-xl font-semibold text-white mb-4">Support</h3>
                         <ul className="space-y-3 text-gray-300">
-                            <li className="hover:text-white"><a>Request Blood</a></li>
-                            <li className="hover:text-white"><a>Testimonials</a></li>
-                            <li className="hover:text-white"><a>FAQs</a></li>
-                            <li className="hover:text-white"><a>Blog</a></li>
+                            <li className="hover:text-white"><a href="pp">Privacy Policy</a></li>
+                            <li className="hover:text-white"><a href="faq">FAQs</a></li>
+                            <li className="hover:text-white"><a href="blog">Blog</a></li>
                         </ul>
                     </div>
 
@@ -76,10 +85,9 @@ const Footer = () => {
                     <div className="hidden md:block">
                         <h3 className="text-xl font-semibold text-white mb-4">Follow Us</h3>
                         <div className="flex justify-center md:justify-start space-x-5 text-2xl">
-                            <a href="#" className="hover:text-blue-400"><FaFacebookF /></a>
-                            <a href="#" className="hover:text-pink-400"><FaInstagram /></a>
-                            <a href="#" className="hover:text-blue-300"><FaXTwitter /></a>
-                            <a href="#" className="hover:text-red-500"><FaYoutube /></a>
+                            <a href="https://www.facebook.com/gm.redoan" className="hover:text-blue-400"><FaFacebookF /></a>
+                            <a href="https://www.linkedin.com/in/gm-redoan" className="hover:text-blue-400"><FaLinkedin /></a>
+                            <a href="https://www.github.com/GMRedoan" className="hover:text-white"><FaGithub/></a>
                         </div>
                     </div>
 

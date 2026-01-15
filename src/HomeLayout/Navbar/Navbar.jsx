@@ -50,7 +50,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav data-aos="zoom-in" className={`pr-4 md:px-6 flex justify-between items-center bg-base-100 sticky top-0 z-50 border-b border-primary ${show ? "translate-y-0" : "-translate-y-full"}`}>
+        <nav className={`pr-4 md:px-6 flex justify-between items-center bg-base-100 sticky top-0 z-50 border-b border-primary ${show ? "translate-y-0" : "-translate-y-full"}`}>
             <div className="flex md:py-1">
 
                 <div className="dropdown">
@@ -141,7 +141,7 @@ const Navbar = () => {
                                 <li>
                                     <button
                                         onClick={handleLogout}
-                                        className="btn btn-sm md:btn-md btn-primary text-white w-full rounded-lg shadow hover:bg-secondary">Log Out
+                                        className="btn btn-sm btn-primary text-white w-full rounded-lg shadow hover:bg-secondary">Log Out
                                     </button>
                                 </li>
 

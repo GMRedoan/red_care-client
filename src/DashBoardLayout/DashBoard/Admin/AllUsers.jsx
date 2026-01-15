@@ -133,7 +133,7 @@ const AllUsers = () => {
 
             <div className="overflow-x-auto bg-base-200 rounded-xl shadow-lg">
                 <table className="table w-full">
-                    <thead className="bg-primary text-white ">
+                    <thead className="bg-primary text-white">
                         <tr>
                             <th>No</th>
                             <th>User</th>
@@ -247,7 +247,7 @@ const AllUsers = () => {
 
                         {filteredUsers.length === 0 && (
                             <tr>
-                                <td colSpan="5" className="text-center py-10 text-gray-400 text-xl">
+                                <td colSpan="5" className="text-center py-10 text-accent text-xl">
                                     No users found.
                                 </td>
                             </tr>

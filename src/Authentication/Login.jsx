@@ -35,7 +35,7 @@ const Login = () => {
     }
 
     return (
-        <div className="py-8 md:py-20 hero bg-base-200">
+        <div className="py-8 md:py-20 hero">
             <title>Login</title>
             <div className="hero-content flex-col">
                 <div className="text-center lg:text-center">
@@ -44,7 +44,7 @@ const Login = () => {
                         Enter your account to continue your blood donation.
                     </p>
                 </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                <div className="card bg-base-200 w-full max-w-sm shrink-0 shadow-2xl">
                     <div className="card-body">
                         <form onSubmit={handleLogin}>
                             <fieldset className="fieldset">

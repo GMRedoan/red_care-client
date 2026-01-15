@@ -3,16 +3,23 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router';
 import { AuthContext } from '../../../Authentication/AuthContex';
 import useAxios from '../../../Hooks/UseAxios';
+import Loader from '../../../Shared/Loader';
 
 const DonorDashBoard = () => {
     const { userInfo } = use(AuthContext);
     const [requests, setRequests] = useState([]);
     const axiosInstance = useAxios()
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axiosInstance.get(`/donationReq/${userInfo?.email}?limit=3`)
-            .then(res => setRequests(res.data));
-    }, [userInfo?.email, axiosInstance])
+        if (!userInfo?.email) return;
+        setLoading(true);
+        axiosInstance
+            .get(`/donationReq/${userInfo.email}?limit=3`)
+            .then(res => setRequests(res.data))
+            .catch(err => console.error(err))
+            .finally(() => setLoading(false)); // stop loader in all cases
+    }, [userInfo?.email, axiosInstance]);
 
     const handleDone = async (id) => {
         const updateStatus = { status: "done" };
@@ -90,10 +97,21 @@ const DonorDashBoard = () => {
             });
     }
 
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-[60vh]">
+                <Loader />
+            </div>
+        );
+    }
+
+
     return (
         <div>
             <div className="text-center">
-                <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                <h2 className="text-3xl
+                 md:text-5xl font-bold mb-4">
                     Welcome back, <span className="text-primary">{userInfo?.name}</span>
                 </h2>
                 <p className="text-accent mb-10" >

@@ -92,7 +92,7 @@ const Registration = () => {
             })
     }
     return (
-        <div className="py-8 md:py-20 hero bg-base-200">
+        <div className="py-8 md:py-20 hero">
             <title>Registration</title>
             <div className="hero-content flex-col">
                 <div className="text-center lg:text-center">
@@ -101,7 +101,7 @@ const Registration = () => {
                         Register now and begin your great job.
                     </p>
                 </div>
-                <div className="card bg-base-100 w-full max-w-4xl shrink-0 shadow-2xl">
+                <div className="card bg-base-200 w-full max-w-4xl shrink-0 shadow-2xl">
                     <div className="card-body">
                         <form onSubmit={handleRegister}>
                             <fieldset className="fieldset">

@@ -10,14 +10,17 @@ import useAxios from '../Hooks/UseAxios';
 const Registration = () => {
     const axiosInstance = useAxios()
     const { districts, upazilas } = useLoaderData()
-    const { createUser, updateUserProfile, setUser } = use(AuthContext)
+    const { createUser, updateUserProfile, setUser, googleLogin } = use(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
+    const from = location.state || "/";
     const notify = (msg) => toast.error(msg);
     const [error, setError] = useState('')
     const [showPass, setShowPass] = useState(false)
     const [showPass2, setShowPass2] = useState(false)
     const [uploading, setUploading] = useState(false)
+
+
     const handleRegister = async (e) => {
         e.preventDefault()
         const form = e.target
@@ -91,6 +94,46 @@ const Registration = () => {
                 notify("Invalid Email")
             })
     }
+
+    const handleGoogle = () => {
+        googleLogin()
+            .then(async (result) => {
+                const { displayName, email } = result.user;
+
+                const newUser = {
+                    name: displayName,
+                    email: email,
+                    role: 'donor',        
+                    status: 'active'    
+                };
+
+                try {
+                     const res = await axiosInstance.post('/users', newUser);
+                     console.log('User saved to DB:', res.data);
+
+                     Swal.fire({
+                        title: "LogIn Successful. Welcome to Red Care 🎊",
+                        icon: "success",
+                        confirmButtonColor: "#F91617"
+                    });
+
+                    navigate(from, { replace: true });
+                } catch (error) {
+                    console.error('Error saving user:', error);
+                    Swal.fire({
+                        title: "Failed to save user info",
+                        text: error.message || 'Please try again',
+                        icon: "error",
+                        confirmButtonColor: "#F91617"
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Google login error:', error);
+                notify(error.message || "Google login failed");
+            });
+    };
+
     return (
         <div className="py-8 md:py-20 hero">
             <title>Registration</title>
@@ -216,14 +259,22 @@ const Registration = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='md:col-span-3 flex justify-center '>
+                                <div className='md:col-span-3 flex justify-center gap-4'>
                                     <button
                                         type="submit"
                                         className="btn bg-primary text-white hover:bg-secondary font-semibold"
                                         disabled={uploading}
                                     >
                                         {uploading ? "Please Wait.." : "Register Now"}
-                                    </button>                                </div>
+                                    </button>
+                                    <button
+                                        onClick={handleGoogle}
+                                        type='button'
+                                        className="btn bg-white text-black border-[#e5e5e5]">
+                                        <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
+                                        Login with Google
+                                    </button>
+                                </div>
                             </fieldset>
                             <p className='pt-2'>Already have an Account ! <Link state={location.state} to='/login'><span className='text-blue-500 font-semibold hover:underline'>Login Now</span></Link></p>
                         </form>

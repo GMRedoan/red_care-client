@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
- import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import { Link } from "react-router";
 import useAxios from "../../../Hooks/UseAxios";
+import Loader from "../../../Shared/Loader"
 
 const AdminAllRequest = () => {
-  const axiosInstance = useAxios()
+  const axiosInstance = useAxios();
 
   const [requests, setRequests] = useState([]);
-  const [filterStatus, setFilterStatus] = useState("all")
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     axiosInstance.get('/donationReq')
-      .then((res) => setRequests(res.data));
+      .then((res) => setRequests(res.data))
+      .finally(() => setLoading(false));
   }, [axiosInstance]);
 
   const filteredRequests =
@@ -21,16 +25,11 @@ const AdminAllRequest = () => {
 
   const handleDone = async (id) => {
     const updateStatus = { status: "done" };
-
-    const res = await axiosInstance.patch(`/donationReqDetails/${id}`,
-      updateStatus)
-
+    const res = await axiosInstance.patch(`/donationReqDetails/${id}`, updateStatus);
     if (res.data.modifiedCount > 0) {
       setRequests((Requests) =>
         Requests.map((req) =>
-          req._id === id
-            ? { ...req, status: "done" }
-            : req
+          req._id === id ? { ...req, status: "done" } : req
         )
       );
       Swal.fire({
@@ -43,16 +42,11 @@ const AdminAllRequest = () => {
 
   const handleCancel = async (id) => {
     const updateStatus = { status: "Canceled" };
-
-    const res = await axiosInstance.patch(`/donationReqDetails/${id}`,
-      updateStatus)
-
+    const res = await axiosInstance.patch(`/donationReqDetails/${id}`, updateStatus);
     if (res.data.modifiedCount > 0) {
       setRequests((Requests) =>
         Requests.map((req) =>
-          req._id === id
-            ? { ...req, status: "Canceled" }
-            : req
+          req._id === id ? { ...req, status: "Canceled" } : req
         )
       );
       Swal.fire({
@@ -61,8 +55,7 @@ const AdminAllRequest = () => {
         confirmButtonColor: "#F91617",
       });
     }
-
-  }
+  };
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -76,14 +69,9 @@ const AdminAllRequest = () => {
     })
       .then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axiosInstance.delete(
-            `/donationReqDetails/${id}`
-          );
-
+          const res = await axiosInstance.delete(`/donationReqDetails/${id}`);
           if (res.data.deletedCount > 0) {
-            setRequests((prev) =>
-              prev.filter((req) => req._id !== id)
-            );
+            setRequests((prev) => prev.filter((req) => req._id !== id));
             Swal.fire({
               title: "Deleted!",
               text: "Donation request has been deleted.",
@@ -93,11 +81,28 @@ const AdminAllRequest = () => {
           }
         }
       });
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader />
+      </div>
+    );
   }
+
+  if (filteredRequests.length === 0) {
+    return (
+      <p className="text-accent text-2xl text-center md:py-30 font-semibold">
+        No donation requests has been found.
+      </p>
+    );
+  }
+
 
   return (
     <div className="p-6 pt-10">
-            <title>Donation Requests</title>
+      <title>Donation Requests</title>
       <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
         All <span className="text-primary">Donation</span> Requests
       </h2>
@@ -136,14 +141,7 @@ const AdminAllRequest = () => {
           </thead>
 
           <tbody>
-            {filteredRequests.length === 0 ? (
-              <tr>
-                <td colSpan="7" className="text-center py-4 text-gray-500">
-                  No donation requests found.
-                </td>
-              </tr>
-            ) : (
-              filteredRequests.map((req, index) => (
+            {filteredRequests.map((req, index) => (
                 <tr key={req._id}>
                   <td>{index + 1}</td>
                   <td>{req.recipientName}</td>
@@ -187,7 +185,7 @@ const AdminAllRequest = () => {
                           Cancel
                         </button>
                       </div>
-                    ): <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
+                    ) : <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
                   </td>
                   <td>
                     {req.status === "pending" ? (
@@ -203,7 +201,7 @@ const AdminAllRequest = () => {
                           Delete
                         </button>
                       </div>
-                    ): <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
+                    ) : <p className="text-gray-400 font-bold text-[10px]">unavailable</p>}
                   </td>
                   <td>
                     <Link
@@ -215,7 +213,7 @@ const AdminAllRequest = () => {
                   </td>
                 </tr>
               ))
-            )}
+            }
           </tbody>
         </table>
       </div>
@@ -224,4 +222,3 @@ const AdminAllRequest = () => {
 };
 
 export default AdminAllRequest;
- 

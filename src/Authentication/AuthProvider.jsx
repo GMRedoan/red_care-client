@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { AuthContext } from "./AuthContex";
 import { auth } from "../Firebase/firebase.config";
 import { useEffect, useState } from "react";
@@ -34,7 +34,12 @@ const AuthProvider = ({ children }) => {
             );
     };
 
-    
+    // sign in with google
+    const googleProvider = new GoogleAuthProvider()
+    const googleLogin = () => {
+        return signInWithPopup(auth, googleProvider)
+    }
+
 
     // logout
     const logout = () => {
@@ -64,9 +69,9 @@ const AuthProvider = ({ children }) => {
     // get user role
     useEffect(() => {
         if (!user) return
-         axiosInstance.get(`/role/${user?.email}`)
-      .then((res) => setUserInfo(res.data))
-      .catch(console.error)
+        axiosInstance.get(`/role/${user?.email}`)
+            .then((res) => setUserInfo(res.data))
+            .catch(console.error)
     }, [user, axiosInstance])
 
     const authData = {
@@ -78,7 +83,8 @@ const AuthProvider = ({ children }) => {
         updateUserProfile,
         logout,
         donors,
-        userInfo
+        userInfo,
+        googleLogin
     }
 
     return <AuthContext value={authData}>{children}</AuthContext>;

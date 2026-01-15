@@ -54,9 +54,8 @@ const Services = () => {
             {/* Service Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {services.map((service) => (
-                    <div data-aos='zoom-in'>
+                    <div data-aos='zoom-in' key={service.id}> 
                         <div
-                            key={service.id}
                             className="group relative bg-base-200 backdrop-blur-md border border-base-300
                        rounded-2xl p-8 text-center shadow-lg
                        transition-all duration-500

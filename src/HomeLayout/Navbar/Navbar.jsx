@@ -79,7 +79,9 @@ const Navbar = () => {
                                 <li>  <NavLink to='pp'>Privacy Policy</NavLink> </li>
                             </div>
                         }
-
+                        <div className='flex items-center gap-1 text-sm'>
+                            <NavLink to='blog'><li>Blog</li></NavLink>
+                        </div>
                     </ul>
                 </div>
                 <Link to='/' className='-ml-4 md:ml-0 flex'>
@@ -105,14 +107,17 @@ const Navbar = () => {
                     </div>
                     {
                         user && <div className='flex items-center gap-1 text-lg'>
-                          <NavLink to='funding'>  <li> Fund </li> </NavLink>
+                            <NavLink to='funding'>  <li> Fund </li> </NavLink>
                         </div>
                     }
                     {
                         user && <div className='flex items-center gap-1 text-lg text-accent'>
-                           <NavLink to='pp'> <li>  Privacy Policy</li> </NavLink>
+                            <NavLink to='pp'> <li>  Privacy Policy</li> </NavLink>
                         </div>
                     }
+                    <div className='flex items-center gap-1 text-lg'>
+                        <NavLink to='blog'><li>Blog</li></NavLink>
+                    </div>
                 </ul>
             </nav>
             <div className='flex items-center gap-2'>

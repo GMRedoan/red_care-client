@@ -8,7 +8,7 @@ const OurMission = () => {
          className="md:py-24 px-10 lg:px-28">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-                <div>
+                <div data-aos="zoom-in">
                     <div className="text-primary font-semibold tracking-[3px] uppercase mb-3 flex items-center gap-2">
                         <span className="inline-block h-[3px] w-10 bg-primary rounded"></span>
                         Our Mission
@@ -30,13 +30,13 @@ const OurMission = () => {
                         </button>
                         <button onClick={() =>
                             document.getElementById("contact-section").scrollIntoView({ behavior: "smooth" })
-                        } className="text-base-200 btn bg-base-300 font-semibold rounded-md hover:text-primary transition px-6">
+                        } className="btn btn-sm md:btn-md text-base-200 bg-base-300 font-semibold rounded-md hover:text-primary transition md:px-6">
                             Email Us <MdMarkEmailRead size={18} />
                         </button>
                     </div>
                 </div>
 
-                <div className="relative w-full">
+                <div data-aos="zoom-in" className="relative w-full">
                     <img
                         src="https://i.ibb.co.com/jvCcjy2m/iowa-04-jpg-img.jpg"
                         alt="Volunteer Presentation"

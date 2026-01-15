@@ -50,7 +50,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className={`pr-4 md:px-6 flex justify-between items-center bg-base-100 sticky top-0 z-50 border-b border-primary ${show ? "translate-y-0" : "-translate-y-full"}`}>
+        <nav data-aos="zoom-in" className={`pr-4 md:px-6 flex justify-between items-center bg-base-100 sticky top-0 z-50 border-b border-primary ${show ? "translate-y-0" : "-translate-y-full"}`}>
             <div className="flex md:py-1">
 
                 <div className="dropdown">
@@ -83,10 +83,10 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link to='/' className='-ml-4 md:ml-0 flex'>
-                    <img className='w-[65px] h-[50px] md:w-[65px] md:h-[50px]' src={logo} alt="" />
+                    <img className='w-[55px] h-[42px] md:w-[65px] md:h-[50px]' src={logo} alt="" />
                     <div className='-space-y-2 pt-2'>
-                        <p className='text-xl md:text-2xl font-semibold font-logo text-blue-400'>RED</p>
-                        <p className='text-xl md:text-xl text-primary ml-5 font-semibold font-logo'>Care</p>
+                        <p className='text-md md:text-2xl font-semibold font-logo text-blue-400'>RED</p>
+                        <p className='text-md md:text-xl text-primary ml-5 font-semibold font-logo'>Care</p>
                     </div>
                 </Link>
             </div>
@@ -124,7 +124,7 @@ const Navbar = () => {
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="m-1">
                                 <img
-                                    className="w-[42px] h-[42px] rounded-full cursor-pointer ring-2 ring-primary/40 hover:ring-primary transition"
+                                    className="w-[30px] md:w-[42px] h-[30px] md:h-[42px] rounded-full cursor-pointer ring-2 ring-primary/40 hover:ring-primary transition"
                                     src={userInfo?.photo}
                                     alt="profile"
                                 />

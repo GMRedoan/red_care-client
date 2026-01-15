@@ -6,7 +6,7 @@ const OurMission2 = () => {
         <section id="aboutUs-section" className="pt-40 md:py-20 px-6 lg:px-20">
             <div className="flex flex-col-reverse md:flex-row gap-10 items-center">
 
-                <div className="relative w-full">
+                <div data-aos="zoom-in" className="relative w-full">
                     <div className="md:border-2 absolute -top-6 -left-6 w-full h-full border-primary rounded-xl"></div>
 
                     <img
@@ -17,15 +17,15 @@ const OurMission2 = () => {
                 </div>
 
                 <div>
-                    <p className="text-primary font-semibold tracking-wider mb-2">
+                    <p data-aos="zoom-in" className="text-primary font-semibold tracking-wider mb-2">
                         About Red Care
                     </p>
 
-                    <h2 className="text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                    <h2 data-aos="zoom-in" className="text-4xl lg:text-5xl font-bold leading-tight mb-6">
                         We Believe That <span className="text-primary">Together</span>, We Can Save More Lives
                     </h2>
 
-                    <p className="text-accent leading-relaxed mb-8">
+                    <p data-aos="zoom-in" className="text-accent leading-relaxed mb-8">
                         Red Care is a dedicated blood-donation community committed to
                         connecting donors, volunteers, and healthcare providers. Every drop
                         of blood has the power to save a life, and our mission is to make
@@ -40,28 +40,28 @@ const OurMission2 = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
 
-                        <div className="flex items-center gap-2">
+                        <div data-aos="zoom-in" className="flex items-center gap-2">
                             <FiCheckCircle className="text-green-600 text-2xl" />
                             <p className="font-medium">Emergency Blood Supply</p>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        <div data-aos="zoom-in" className="flex items-center gap-2">
                             <FiCheckCircle className="text-yellow-600 text-2xl" />
                             <p className="font-medium">Support for Critical Patients</p>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        <div data-aos="zoom-in" className="flex items-center gap-2">
                             <FiCheckCircle className="text-red-500 text-2xl" />
                             <p className="font-medium">Blood for Mothers & Newborns</p>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        <div data-aos="zoom-in" className="flex items-center gap-2">
                             <FiCheckCircle className="text-green-800 text-2xl" />
                             <p className="font-medium">Medical & Surgical Needs</p>
                         </div>
                     </div>
 
-                    <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-sm md:btn-md btn-primary text-white px-8 py-3 rounded-md font-semibold hover:bg-secondary">
+                    <button data-aos="zoom-in" onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-sm md:btn-md btn-primary text-white px-8 py-3 rounded-md font-semibold hover:bg-secondary">
                         Learn More
                         <FiArrowRight className="text-xl" />
                     </button>

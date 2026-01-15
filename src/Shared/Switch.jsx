@@ -14,7 +14,7 @@ const Switch = ({ theme, toggleTheme }) => {
       />
 
       {/* track */}
-      <div className="w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner transition-colors duration-300" />
+      <div className="w-10 md:w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner transition-colors duration-300" />
 
       {/* knob */}
       <div

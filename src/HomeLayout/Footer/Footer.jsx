@@ -4,7 +4,7 @@ import logo from '../../assets/bglogo.png'
 
 const Footer = () => {
     return (
-        <footer className="bg-linear-to-b from-black to-gray-900 text-gray-300 py-12">
+        <footer data-aos="zoom-in" className="bg-linear-to-b from-black to-gray-900 text-gray-300 py-12">
             <div className="container mx-auto px-4">
 
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-10 text-center md:text-left">

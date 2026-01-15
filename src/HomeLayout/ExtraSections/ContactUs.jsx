@@ -14,7 +14,7 @@ const ContactUs = () => {
     }
     return (
         <div id="contact-section" className="w-full py-10 px-4">
-            <div className="text-center pb-20">
+            <div data-aos="zoom-in" className="text-center pb-20">
                 <h1 className="text-4xl md:text-5xl font-bold leading-snug">
                     Get in <span className="text-primary">Touch</span> With Us
                 </h1>
@@ -23,7 +23,7 @@ const ContactUs = () => {
                     Reach out for inquiries, assistance, or collaboration. We're committed to providing quick and helpful responses.
                 </p>
             </div>
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div data-aos="zoom-in" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
 
                 <div className="bg-red-200 text-black p-10 rounded-xl shadow-lg hover:bg-red-300">
                     <h2 className="text-3xl font-bold mb-4">Connect With Our Team</h2>
@@ -53,7 +53,8 @@ const ContactUs = () => {
                     </div>
                 </div>
 
-                <div className="bg-base-200 p-10 rounded-xl shadow-md">
+                <div className="bg-base-2
+                00 p-10 rounded-xl shadow-md">
                     <form onSubmit={handleContact} className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
                         <input

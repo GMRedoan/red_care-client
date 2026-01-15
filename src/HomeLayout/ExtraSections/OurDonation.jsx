@@ -10,7 +10,7 @@ const OurDonation = () => {
     const donations = use(donationPromise)
     return (
         <div>
-            <div className='mx-4 text-center my-10 mt-20'>
+            <div data-aos='zoom-in' className='mx-4 text-center my-10 mt-20'>
                 <h1 className="text-4xl md:text-5xl font-bold leading-snug">Simple Steps to Make a <span className='text-primary'>Big Impact</span>
                 </h1>
 

@@ -4,7 +4,7 @@ import * as Icons from "react-icons/fa6";
 const OurDonationCard = ({donation}) => {
   const IconComponent = Icons[donation.icon] || Icons.FaRegClipboard
     return (
-    <div className="w-full max-w-sm bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl duration-300">
+    <div className="w-full max-w-sm bg-base-200 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl duration-300">
       
        <div className="relative h-60 w-full">
         <img
@@ -21,12 +21,12 @@ const OurDonationCard = ({donation}) => {
       </div>
 
        <div className="p-6">
-        <h2 className="text-2xl font-extrabold tracking-wide text-gray-900 flex items-center gap-3 mb-3">
+        <h2 className="text-2xl font-extrabold tracking-wide flex items-center gap-3 mb-3">
           <IconComponent className="text-red-600 text-3xl" />
           {donation.title}
         </h2>
 
-        <p className="text-gray-600 leading-relaxed text-[15px]">
+        <p className="text-accent leading-relaxed text-[15px]">
           {donation.description}
         </p>
       </div>
